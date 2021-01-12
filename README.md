@@ -4,7 +4,6 @@ Dépôt de projets de gestion d'école en utilisant les webservices.
 
 ## Infos versions
 
-V2
 - Webservice Restful : projet maven web multimodule avec Jersey 2.32
 - Client : projet maven web multimodule avec Jersey 2.32
 
@@ -14,7 +13,7 @@ V2
 
 ## Equipe
    
-Yoeko Klu
-Morgan Franca
-Cédric Nozerand
+Yoeko Klu  
+Morgan Franca  
+Cédric Nozerand  
 Benjamin Boutrois
