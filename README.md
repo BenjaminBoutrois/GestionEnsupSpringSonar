@@ -1,4 +1,4 @@
-# GestionEnsupWebService
+# GestionEnsupSpringSonar
 
 Dépôt de projets de gestion d'école en utilisant les webservices.
 
