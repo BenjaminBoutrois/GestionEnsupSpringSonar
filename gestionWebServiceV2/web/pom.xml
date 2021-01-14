@@ -11,6 +11,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
+	<properties>
+		<sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
+	</properties>
+
 	<artifactId>web</artifactId>
 	<packaging>war</packaging>
 

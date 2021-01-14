@@ -43,6 +43,13 @@ public class StudentService implements IStudentService
 		studentDao = new StudentDao();
 	}
 
+	public StudentService(IStudentDao studentDao)
+	{
+		super();
+		this.studentDao = studentDao;
+		LOG.info("Démarrage du service StudentService");
+	}
+	
 	// Methods
 
 	/*

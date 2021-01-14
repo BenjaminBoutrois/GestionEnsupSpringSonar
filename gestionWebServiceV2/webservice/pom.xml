@@ -18,6 +18,8 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		
+		<sonar.host.url>http://127.0.0.1:9000</sonar.host.url>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -83,6 +85,14 @@
 		<dependency>
 			<groupId>org.glassfish.jersey.inject</groupId>
 			<artifactId>jersey-hk2</artifactId>
+		</dependency>
+
+		<!-- Mockito -->
+		<dependency>
+		   <groupId>org.mockito</groupId>
+		   <artifactId>mockito-all</artifactId>
+		   <version>1.9.5</version>
+		   <scope>test</scope>
 		</dependency>
 
 	</dependencies>
