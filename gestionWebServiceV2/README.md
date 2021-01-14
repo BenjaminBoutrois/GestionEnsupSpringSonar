@@ -17,3 +17,11 @@ Webservice Restful contenant le dao du projet GestionEnsup
 4. Lancer le serveur Tomcat pour déployer le projet sur le serveur
 5. Au niveau du serveur de base de données, importer le fichier **jpagestionensup.sql**
 6. Ouvrir un navigateur et entrer `http://127.0.0.1:8080/web` dans la barre d'URL pour accéder à l'application
+
+## Partie test
+
+Nous avons utilisé la technologie JUnit et Mockito pour faire les tests de la couche WebService du projet GestionWebServiceV2.
+
+**Junit:** Est un framework open source permettant des réaliser des tests sur du code Java. Le principe est de s'assurer que le code / fonction a le bon comportement même après une modification.
+
+**Mockito:** S'utilise conjointement à JUnit. C'est un framework Java permettant de mocker / espionner des objets, simuler ainsi que vérifier des comportements ou encore simplifier l'écriture de tests unitaires. 
