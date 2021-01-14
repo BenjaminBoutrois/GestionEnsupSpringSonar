@@ -44,27 +44,27 @@ private static final Logger LOG = LogManager.getLogger(StudentServiceTest.class)
 		 * la totalité des informations de cet utilisateur 
 		 */
 		
-//		// Création des valeurs pour le fichier JSON
-//		String login = "123";
-//		String password = "azerty";
-//		
-//		String input = "{\"login\":\"" + login + "\",\"password\":" + password + "}";
-//		
-//		// Création du fichier JSON
-//		ObjectNode node = null;
-//		try {
-//			node = (ObjectNode) new ObjectMapper().readTree(input);
-//		} catch (JsonProcessingException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		// Imposer un comportement au mock (stubbing)
-//		Mockito.when(iUserDao.getUser(login, password)).thenReturn(new User("test", "test"));
-//		// Initialisation d'un étudiant à partir du renvoie de la méthode getStudent de la couche service 
-//		// avec l'id de l'étudiant en paramètre
-//		User user = userService.getUser(node);
-//		// Vérification de l'authenticité d'une information de l'étudiant récupéré à l'étape précedente
-//		Assert.assertEquals(user.getLogin(), "test");
-//		Mockito.verify(iUserDao).getUser(login, password);
+		// Création des valeurs pour le fichier JSON
+		String login = "123";
+		String password = "mdp";
+		
+		String input = "{\"login\":\"" + login + "\", \"password\":\"" + password + "\"}";
+		
+		// Création du fichier JSON
+		ObjectNode node = null;
+		try {
+			node = (ObjectNode) new ObjectMapper().readTree(input);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		// Imposer un comportement au mock (stubbing)
+		Mockito.when(iUserDao.getUser(login, password)).thenReturn(new User("test", "test"));
+		// Initialisation d'un étudiant à partir du renvoie de la méthode getStudent de la couche service 
+		// avec l'id de l'étudiant en paramètre
+		User user = userService.getUser(node);
+		// Vérification de l'authenticité d'une information de l'étudiant récupéré à l'étape précedente
+		Assert.assertEquals(user.getLogin(), "test");
+		Mockito.verify(iUserDao).getUser(login, password);
 	}
 }
