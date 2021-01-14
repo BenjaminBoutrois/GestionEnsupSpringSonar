@@ -4,7 +4,7 @@ Webservice Restful contenant le dao du projet GestionEnsup
 
 ## Prérequis
 
-- JDK 8
+- JDK 11
 - Maven 3.6.3
 - Apache Tomcat 9 configuré sur le port 8080
 - L'identifiant de la base de données doit être "root" et le mot de passe doit être "" (vide).
