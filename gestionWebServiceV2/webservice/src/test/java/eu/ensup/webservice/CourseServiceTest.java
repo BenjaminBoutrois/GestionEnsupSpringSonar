@@ -12,6 +12,12 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.JsonNodeFactory;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 import eu.ensup.dao.ICourseDao;
 import eu.ensup.domaine.Course;
 import eu.ensup.domaine.Student;
@@ -61,5 +67,33 @@ public class CourseServiceTest {
 		Assert.assertEquals(courses2.get(0).getThemeCourse(), "Maven");
 		Assert.assertEquals(courses2.get(1).getThemeCourse(), "Management");
 		Mockito.verify(iCourseDao).getAllCourses();
+	}
+	
+	@Test
+	public void associateCourseTest() {
+		/* 
+		 * Scénario de test :
+		 * Vérifier si la méthode associateCourse de la couche service appelle bien la méthode associateCourse
+		 * de la couche dao
+		 */
+		
+		// Création des valeurs du fichier JSON
+		String course = "Java";
+		int id = 1;
+		String input = "{\"course\":\"" + course + "\",\"id\":" + id + "}";
+		// Création du fichier JSON
+		ObjectNode node = null;
+		try {
+			node = (ObjectNode) new ObjectMapper().readTree(input);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
+		// Imposer un comportement au mock (stubbing)
+		Mockito.doNothing().when(iCourseDao).associateCourse(course, id);
+		// Vérification que la méthode associateCourse de la couche service a bien appelé la méthode 
+		// associateCourse de la couche dao
+		courseService.associateCourse(node);
+		Mockito.verify(iCourseDao, Mockito.times(1)).associateCourse(course, id);
 	}
 }
