@@ -152,5 +152,26 @@ public class StudentServiceTest {
 		// Vérification que la méthode deleteStudent de la couche service a bien appelé la méthode 
 		// deleteStudent de la couche dao
 		Mockito.verify(iStudentDao, Mockito.times(1)).deleteStudent(1);
-	}	
+	}
+
+	@Test
+	public void searchStudent() {	
+		// Création de deux étudiants
+		Student student1 = new Student("test1", "test1", "test1", "test1", "test1", "test1");
+		Student student2 = new Student("test1", "test1", "test2", "test2", "test2", "test2");
+		// Création d'une liste d'étudiant vide
+		ArrayList<Student> students = new ArrayList<Student>();
+		// Insértion des étudiants dans la liste
+		students.add(student1);
+		students.add(student2);
+		
+		// Imposer un comportement au mock (stubbing)
+		Mockito.when(iStudentDao.searchStudent("test1", "test1")).thenReturn(students);
+		// Création d'une nouvelle liste d'étudiant
+		List<Student> students2 = studentService.searchStudent("test1", "test1");
+		// Vérification de l'authenticité d'une information pour tous les étudiants récupérés à l'étape précedente
+		Assert.assertEquals(students2.get(0).getFirstName(), "test1");
+		Assert.assertEquals(students2.get(1).getFirstName(), "test1");
+		Mockito.verify(iStudentDao).searchStudent("test1", "test1");
+	}
 }
