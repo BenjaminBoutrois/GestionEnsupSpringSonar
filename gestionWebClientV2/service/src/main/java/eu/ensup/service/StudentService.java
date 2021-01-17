@@ -13,9 +13,13 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.jersey.client.ClientConfig;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import eu.ensup.domaine.Student;
+import eu.ensup.domaine.User;
 
 /**
  * Classe StudentService : Fait le lien entre le lanceur et le DAO concernant
@@ -30,7 +34,7 @@ public class StudentService implements IStudentService
 
 	private static final Logger LOG = LogManager.getLogger(StudentService.class);
 
-	private static final String URL = "http://localhost:8080/web/";
+	private static final String URL = "http://localhost:8004/SpringMVC/servlet/";
 
 	// Constructors
 
@@ -54,11 +58,24 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient();
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/createStudent");
+		WebTarget webTarget = client.target(URL).path("student/create");
 
-		String input = student.toJson();
-
-		Response response = webTarget.request("application/json").post(Entity.json(input));
+//		String input = student.toJson();
+		
+		Response response = null;
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String input;
+		
+		try {
+			input = objectMapper.writeValueAsString(student);
+			response = webTarget.request("application/json").post(Entity.json(input));
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	/*
@@ -75,10 +92,10 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient(clientConfig);
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/getStudent/" + id);
+		WebTarget webTarget = client.target(URL).path("student/detail/" + id);
 
 		Response response = webTarget.request("application/json").get();
-
+		
 		return response.readEntity(Student.class);
 	}
 
@@ -119,7 +136,7 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient(clientConfig);
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/getAllStudents");
+		WebTarget webTarget = client.target(URL).path("student/getAll");
 
 		Response response = webTarget.request("application/json").get();
 
@@ -139,7 +156,7 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient();
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/deleteStudent/" + id);
+		WebTarget webTarget = client.target(URL).path("student/delete/" + id);
 
 		Response response = webTarget.request("application/json").delete();
 	}
@@ -156,11 +173,23 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient();
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/updateStudent/" + oldStudentId);
+		WebTarget webTarget = client.target(URL).path("student/update/" + oldStudentId);
 
-		String input = student.toJson();
+		Response response = null;
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String input;
+		
+		try {
+			input = objectMapper.writeValueAsString(student);
+			response = webTarget.request("application/json").put(Entity.json(input));
+			
+		} catch (JsonProcessingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		Response response = webTarget.request("application/json").put(Entity.json(input));
+//		Response response = webTarget.request("application/json").put(Entity.json(input));
 	}
 
 	/**
@@ -179,7 +208,7 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient(clientConfig);
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/searchStudent")
+		WebTarget webTarget = client.target(URL).path("student/search")
 				.queryParam("firstName", firstName).queryParam("lastName", lastName);
 
 		Response response = webTarget.request("application/json").get();
