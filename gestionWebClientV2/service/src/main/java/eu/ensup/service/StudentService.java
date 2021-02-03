@@ -34,7 +34,7 @@ public class StudentService implements IStudentService
 
 	private static final Logger LOG = LogManager.getLogger(StudentService.class);
 
-	private static final String URL = "http://localhost:8004/SpringMVC/servlet/";
+	private static final String URL = "http://localhost:8081/SpringMVC/servlet/";
 
 	// Constructors
 
@@ -115,10 +115,10 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient(clientConfig);
 
-		WebTarget webTarget = client.target(URL).path("rest/studentService/getStudentByMail/" + mail);
+		WebTarget webTarget = client.target(URL).path("student/getByMail/" + mail);
 
 		Response response = webTarget.request("application/json").get();
-
+		
 		return response.readEntity(Student.class);
 	}
 
@@ -208,7 +208,7 @@ public class StudentService implements IStudentService
 
 		Client client = ClientBuilder.newClient(clientConfig);
 
-		WebTarget webTarget = client.target(URL).path("student/search")
+		WebTarget webTarget = client.target(URL).path("student/search/")
 				.queryParam("firstName", firstName).queryParam("lastName", lastName);
 
 		Response response = webTarget.request("application/json").get();

@@ -30,7 +30,7 @@ public class CourseService implements ICourseService
 
 	private static final Logger LOG = LogManager.getLogger(CourseService.class);
 
-	private static final String URL = "http://localhost:8004/SpringMVC/servlet/";
+	private static final String URL = "http://localhost:8081/SpringMVC/servlet/";
 
 	// Constructors
 
@@ -58,7 +58,8 @@ public class CourseService implements ICourseService
 
 		Client client = ClientBuilder.newClient();
 
-		WebTarget webTarget = client.target(URL).path("student/associateCours");
+		WebTarget webTarget = client.target(URL).path("student/addCourse/" + id);	
+		
 
 		String input = "{\"course\":\"" + course + "\",\"id\":" + id + "}";
 
@@ -87,4 +88,5 @@ public class CourseService implements ICourseService
 		{
 		});
 	}
+	
 }

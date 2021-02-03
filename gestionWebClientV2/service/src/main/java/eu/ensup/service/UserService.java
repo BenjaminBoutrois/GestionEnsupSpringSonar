@@ -33,7 +33,7 @@ public class UserService implements IUserService
 
 	private static final Logger LOG = LogManager.getLogger(UserService.class);
     
-    private static final String URL = "http://localhost:8004/SpringMVC/servlet/";
+    private static final String URL = "http://localhost:8081/SpringMVC/servlet/";
 
 	// Constructors
 
